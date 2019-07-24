@@ -31,10 +31,11 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos
-
   Repo.find().sort({ updated_at: -1 }).limit(25).then((results) => {
-        console.log('RESULTS!!!:', results)
-        res.end('Here\'s the 25 most recent repos!');
+    Repo.count().then((count) => {
+      var obj = {results, count};
+      res.send(obj);
+    })
   });
 });
 

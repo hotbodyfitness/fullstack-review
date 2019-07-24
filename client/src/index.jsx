@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      count: 0
     }
 
   }
@@ -19,8 +20,12 @@ class App extends React.Component {
       data: term,
       method: 'POST',
       url: '/repos',
-      success: (result) => {
-        console.log('result from search', result)
+      success: (obj) => {
+        console.log('results from search', obj)
+        this.setState({
+          repos: obj.results,
+          count: obj.count
+        });
       }
     });
   }
@@ -28,7 +33,7 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} count={this.state.count}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }
