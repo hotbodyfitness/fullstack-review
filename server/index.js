@@ -13,18 +13,15 @@ app.post('/repos', function (req, res) {
   // and get the repo information from the github API, then
   // save the repo information in the database
   var username = Object.keys(req.body)[0];
-  console.log('username:', username);
 
-  getReposByUsername(username, () => {
-    console.log('res received');
-    save(username).then((res) => {
-      console.log('result from .save() promise:', res)
+  getReposByUsername(username, (response) => {
+    var body = JSON.parse(response.body);
+    body.forEach((repo) => {
+      save(username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url).then((result) => {
+        console.log('result from .save() promise:', result)
+      });
     });
   });
-  // console.log('result:', result);
-
-
-  // console.log('save(username)', save(username));
 
 });
 

@@ -5,33 +5,30 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'db connection ERROR:'));
 db.once('open', () => {console.log('db CONNECTED!')});
 
-let repoSchema = /* new */ mongoose.Schema({
+let repoSchema = new mongoose.Schema({
   // TODO: your schema here!
-  id: Number,
-  name: String,
-  full_name: String,
-  owner: {
-    login: String,
-    id: Number,
-    url: String,
-    repos_url: String
-  },
-  html_url: String,
-  url: String,
-  created_at: Date, // or String?
+  name: String, // name of repo
+  owner: String, // username
+  html_url: {type: String, unique: true}, // url of repo
   updated_at: Date, // or String?
-  pushed_at: Date // or String?
+  contributors_url: String // repoURL/contributers
 });
+repoSchema.path('html_url').index({unique: true});
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-// console.log('user.name from schema', user.name);
-
-let save = (username/* TODO */) => {
+let save = (username, url, name, updated, contributors) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
-  var user = new Repo({ name: username });
+  var user = new Repo({
+    name: name, // name of repo
+    owner: username, // username
+    html_url: url,
+    updated_at: updated, // or String?
+    contributors_url: contributors
+  });
+
   return user.save((err, res) => {
     if (err) {
       console.log('error from SAVE fn', err);
