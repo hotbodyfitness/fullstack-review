@@ -3,6 +3,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let getReposByUsername = require('../helpers/github.js').getReposByUsername;
 let save = require('../database/index.js').save;
+let Repo = require('../database/index.js').Repo;
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -19,7 +20,9 @@ app.post('/repos', function (req, res) {
     body.forEach((repo) => {
       save(username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url)
         .then((result) => {
-          console.log('Successfully saved to MongoDB!');
+          console.log('Successfully saved to MongoDB!', result, username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url);
+          res.redirect('/repos');
+          // res.end('Successful search');
         });
     });
   });
@@ -28,6 +31,11 @@ app.post('/repos', function (req, res) {
 
 app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos
+
+  Repo.find().sort({ updated_at: -1 }).limit(25).then((results) => {
+        console.log('RESULTS!!!:', results)
+        res.end('Here\'s the 25 most recent repos!');
+  });
 });
 
 let port = 1128;

@@ -38,4 +38,7 @@ let save = (username, url, name, updated, contributors) => {
   });
 };
 
-module.exports.save = save;
+module.exports = {
+  save,
+  Repo
+};
