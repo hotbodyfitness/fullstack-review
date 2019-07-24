@@ -17,16 +17,16 @@ app.post('/repos', function (req, res) {
   getReposByUsername(username, (response) => {
     var body = JSON.parse(response.body);
     body.forEach((repo) => {
-      save(username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url).then((result) => {
-        console.log('result from .save() promise:', result)
-      });
+      save(username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url)
+        .then((result) => {
+          console.log('Successfully saved to MongoDB!');
+        });
     });
   });
 
 });
 
 app.get('/repos', function (req, res) {
-  // TODO - your code here!
   // This route should send back the top 25 repos
 });
 
