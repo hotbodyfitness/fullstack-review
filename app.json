@@ -1,0 +1,7 @@
+{
+  "name": "GitHub Fetcher",
+  "description": "A fullstack Node.js app using Express 4 by Zack K. Miller for Hack Reactor",
+  "repository": "https://github.com/hotbodyfitness/rpt15-fullstack-review",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}

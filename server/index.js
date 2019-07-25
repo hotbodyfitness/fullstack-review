@@ -20,7 +20,6 @@ app.post('/repos', function (req, res) {
     body.forEach((repo) => {
       save(username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url)
         .then((result) => {
-          console.log('Successfully saved to MongoDB!', result, username, repo.html_url, repo.name, repo.updated_at, repo.contributors_url);
           res.redirect('/repos');
           // res.end('Successful search');
         });

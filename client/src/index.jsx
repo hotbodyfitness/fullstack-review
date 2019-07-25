@@ -11,17 +11,30 @@ class App extends React.Component {
       repos: [],
       count: 0
     }
+  }
 
+  componentDidMount() {
+    $.ajax({
+      method: 'GET',
+      url: '/repos',
+      success: (obj) => {
+        // console.log('results from page load', obj)
+        this.setState({
+          repos: obj.results,
+          count: obj.count
+        });
+      }
+    });
   }
 
   search (term) {
-    console.log(`${term} was searched`);
+    // console.log(`${term} was searched`);
     $.ajax({
       data: term,
       method: 'POST',
       url: '/repos',
       success: (obj) => {
-        console.log('results from search', obj)
+        // console.log('results from search', obj)
         this.setState({
           repos: obj.results,
           count: obj.count
@@ -32,7 +45,7 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Github Fetcher</h1>
+      <h1>GitHub Fetcher</h1>
       <RepoList repos={this.state.repos} count={this.state.count}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)

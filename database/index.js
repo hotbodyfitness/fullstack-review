@@ -18,14 +18,12 @@ repoSchema.path('html_url').index({unique: true});
 let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (username, url, name, updated, contributors) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
+  // This function should save a repo or repos to the MongoDB
   var user = new Repo({
-    name: name, // name of repo
-    owner: username, // username
+    name: name,
+    owner: username,
     html_url: url,
-    updated_at: updated, // or String?
+    updated_at: updated,
     contributors_url: contributors
   });
 

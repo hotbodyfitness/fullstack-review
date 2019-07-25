@@ -1,3 +1,4 @@
+require('dotenv').config(); /* FROM the DOCS: config() will read your .env file, parse the contents, assign it to process.env, and return an Object with a parsed key containing the loaded content or an error key if it failed. */
 const request = require('request');
 const config = require('../config.js');
 
@@ -8,7 +9,8 @@ let getReposByUsername = (username, cb/* TODO */) => {
     url: `https://api.github.com/users/${username}/repos`,
     headers: {
       'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
+      // 'Authorization': `token ${config.TOKEN}`
+      'Authorization': `token ${process.env.TOKEN}` // do I need to reference the directory
     }
   };
   request(options, (err, res, body) => {
