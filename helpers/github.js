@@ -1,6 +1,6 @@
 require('dotenv').config(); /* FROM the DOCS: config() will read your .env file, parse the contents, assign it to process.env, and return an Object with a parsed key containing the loaded content or an error key if it failed. */
 const request = require('request');
-const config = require('../config.js');
+// const config = require('../config.js');
 
 let getReposByUsername = (username, cb/* TODO */) => {
   // TODO - Use the request module to request repos for a specific
