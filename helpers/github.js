@@ -10,7 +10,7 @@ let getReposByUsername = (username, cb/* TODO */) => {
     headers: {
       'User-Agent': 'request',
       // 'Authorization': `token ${config.TOKEN}`
-      'Authorization': `token ${process.env.TOKEN}` // do I need to reference the directory
+      'Authorization': `token ${process.env.TOKEN}`
     }
   };
   request(options, (err, res, body) => {
