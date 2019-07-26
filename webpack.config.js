@@ -6,7 +6,7 @@ module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
-    path: __dirname
+    path: DIST_DIR
   },
   module : {
     loaders : [

@@ -6,8 +6,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "start": "server/index.js",
-    "postinstall": "npm run react-dev"
+    "start": "server/index.js"
   },
   "author": "Zack K. Miller",
   "license": "ISC",
